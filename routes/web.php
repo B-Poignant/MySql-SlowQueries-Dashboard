@@ -55,3 +55,6 @@ Route::post('/import', function (Request $request) {
 	
     return redirect('/');
 })->name('queries.import.post');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
