@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ImportsController extends Controller
 {
@@ -39,18 +41,15 @@ class ImportsController extends Controller
 		$import = new \App\Import;
 		
 		if ($request->isMethod('post')) {
-			var_dump($request->file('log'));exit;
-				$data = $request->validate([
-					'log' => 'required|max:10000|mimes:text/plain',
-				]);
-			
-				$path = $request->file('log')->store('imports');
-				$import->path = $path;
-				$import->size = Storage::size($path);
+			$data = $request->validate([
+				'log' => 'required|max:10000',
+			]);
 
-				
-				$import->save();
-	
+			$path = $request->file('log')->store('imports/'.Auth::user()->id);
+			$import->path = $path;
+			$import->size = Storage::size($path);
+
+			$import->save();
 	
 			return redirect()->route('imports.index')->with('status', 'Import created');
 			

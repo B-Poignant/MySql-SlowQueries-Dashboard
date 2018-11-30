@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('index');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
 Route::get('/queries', 'QueriesController@index')->name('queries.index');
 Route::match(['get','post'],'/queries/submit', 'QueriesController@submit')->name('queries.submit');

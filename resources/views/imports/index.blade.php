@@ -15,7 +15,7 @@
 @endif
 
                     @foreach ($imports as $import)
-	   {{ $import->sync }}<br />
+	   {{ $import->sync }} {{ $import->path }}<br />
 	@endforeach
 	
 	{{ $imports->links() }}
