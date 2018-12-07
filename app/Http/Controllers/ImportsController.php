@@ -25,7 +25,7 @@ class ImportsController extends Controller
      */
     public function index()
     {
-		$imports = \App\Import::paginate(15);
+		$imports = \App\Import::where('user_id', '=', Auth::user()->id)->paginate(15);
 	
         return view('imports/index', ['imports' => $imports]);
     }
@@ -48,7 +48,8 @@ class ImportsController extends Controller
 			$path = $request->file('log')->store('imports/'.Auth::user()->id);
 			$import->path = $path;
 			$import->size = Storage::size($path);
-
+			$import->user_id = Auth::user()->id;
+			
 			$import->save();
 	
 			return redirect()->route('imports.index')->with('status', 'Import created');
