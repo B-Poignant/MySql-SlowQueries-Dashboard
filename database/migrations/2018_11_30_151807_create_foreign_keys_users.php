@@ -24,7 +24,7 @@ class CreateForeignKeysUsers extends Migration
 		
 		    $table->foreign('user_id')->references('id')->on('users');
 
-		    $table->unsignedInteger('import_id');
+		    $table->unsignedInteger('import_id')->nullable();
 		
 		    $table->foreign('import_id')->references('id')->on('imports');
 	    });

@@ -26,7 +26,8 @@
                             <tbody>
                             @foreach ($imports as $import)
                                 @php
-echo '<pre>';var_dump( $import    );  echo '</pre>';    @endphp                    <tr>
+echo '<pre>';var_dump( $import    );  echo '</pre>';    @endphp
+                                <tr>
                                     <td>{{ $import->sync }}</td>
                                     <td>{{ $import->path }}</td>
                                     <td>{{ $import->size }}</td>
