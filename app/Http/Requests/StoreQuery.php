@@ -24,7 +24,9 @@ class StoreQuery extends FormRequest
     public function rules()
     {
         return [
-            'query' => 'required|max:255'
+            'query' => 'required|max:255',
+            'time' => 'numeric',
+            'lock_time' => 'numeric'
         ];
     }
 }

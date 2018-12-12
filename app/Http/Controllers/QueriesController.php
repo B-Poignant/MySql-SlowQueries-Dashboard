@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuery;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -41,27 +42,27 @@ class QueriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function submit(Request $request)
+    public function submit()
     {
-
         $query = new \App\Query;
-
-        if ($request->isMethod('post')) {
-            $data = $request->validate([
-                'query' => 'required|max:255',
-            ]);
-
-            $query->query = $data['query'];
-            $query->user_id = Auth::user()->id;
-
-            $query->save();
-
-            return redirect()->route('queries.index')->with('status', 'Query created');
-
-        }
 
         return view('queries/submit',['query'=>$query]);
     }
 
-	
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function post(StoreQuery $request)
+    {
+        $data = $request->validated();
+
+        $query = new \App\Query($data);
+        $query->user_id = Auth::user()->id;
+
+        $query->save();
+
+        return redirect()->route('queries.index')->with('status', 'Query created');
+    }
 }

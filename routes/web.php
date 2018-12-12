@@ -22,7 +22,8 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
 Route::get('/queries/index/{import_id?}', 'QueriesController@index')->name('queries.index');
-Route::match(['get','post'],'/queries/submit', 'QueriesController@submit')->name('queries.submit');
+Route::match('get','/queries/submit', 'QueriesController@submit')->name('queries.submit');
+Route::match('post','/queries/submit', 'QueriesController@post')->name('queries.post');
 
-Route::get('/imports', 'ImportsController@index')->name('imports.index');
+Route::get('/imports/index', 'ImportsController@index')->name('imports.index');
 Route::match(['get','post'],'/imports/submit', 'ImportsController@submit')->name('imports.submit');

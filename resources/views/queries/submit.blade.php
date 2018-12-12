@@ -17,13 +17,23 @@
     </div>
 @endif
 
-		{!! Form::model($query,['route' => 'queries.submit']) !!}
+		{!! Form::model($query,['route' => 'queries.post']) !!}
 		
 		 <div class="form-group">
 		  {!! Form::label('query', 'Query') !!}
 		  {!! Form::text('query', '', ['class' => 'form-control']) !!}
 		</div>
-		
+
+				<div class="form-group">
+					{!! Form::label('time', 'Time') !!}
+					{!! Form::text('time', '', ['class' => 'form-control']) !!}
+				</div>
+
+				<div class="form-group">
+					{!! Form::label('lock_time', 'Lock time') !!}
+					{!! Form::text('lock_time', '', ['class' => 'form-control']) !!}
+				</div>
+
 		{!! Form::submit() !!}
 		{!! Form::close() !!}
 		 </div>

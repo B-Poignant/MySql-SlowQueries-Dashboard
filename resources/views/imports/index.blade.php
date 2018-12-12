@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Imports index</div>
+                <div class="card-header">Imports index <a class="btn btn-primary" href="{{ route('imports.submit') }}">{{__('Add an import')}}</a></div>
 
                 <div class="card-body">
 					@if (session('status'))
@@ -25,9 +25,7 @@
                             </thead>
                             <tbody>
                             @foreach ($imports as $import)
-                                @php
-echo '<pre>';var_dump( $import    );  echo '</pre>';    @endphp
-                                <tr>
+                                 <tr>
                                     <td>{{ $import->sync }}</td>
                                     <td>{{ $import->path }}</td>
                                     <td>{{ $import->size }}</td>

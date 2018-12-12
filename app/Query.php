@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Query extends Model
 {
+    protected $table = 'queries';
+
 	protected $fillable = [
         'time',
         'user',
@@ -16,5 +18,8 @@ class Query extends Model
 		'rows_sent',
 		'rows_examined',
 		'query',
+    ];
+    protected $attributes = [
+        'import_id' => null,
     ];
 }

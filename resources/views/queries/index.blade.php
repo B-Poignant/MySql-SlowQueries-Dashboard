@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Queries index <a class="btn btn-primary" href="{{ route('queries.submit') }}">aa</a></div>
+                <div class="card-header">Queries index <a class="btn btn-primary" href="{{ route('queries.submit') }}">{{__('Add a query')}}</a></div>
 
                 <div class="card-body">
 @if (session('status'))
@@ -16,14 +16,14 @@
     <table class="table">
         <thead>
         <tr>
-            <th> {{ __('Status') }}</th>
-            <th> {{ __('Path') }}</th>
-            <th> {{ __('Size') }}</th>
+            <th> {{ __('Query') }}</th>
+            <th> {{ __('Time') }}</th>
+            <th> {{ __('Lock Time') }}</th>
         </tr>
         </thead>
         <tbody>
                     @foreach ($queries as $query)
-	  <tr><td>{{ $query->query }}</td></tr>
+	  <tr><td>{{ $query->query }}</td><td>{{ $query->time }}</td><td>{{ $query->lock_time }}</td></tr>
                     @endforeach
 	
 	{{ $queries->links() }}
