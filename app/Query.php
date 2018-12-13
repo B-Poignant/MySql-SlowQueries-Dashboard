@@ -21,5 +21,6 @@ class Query extends Model
     ];
     protected $attributes = [
         'import_id' => null,
+        'user_id' => null,
     ];
 }

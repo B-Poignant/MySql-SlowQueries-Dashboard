@@ -11,4 +11,8 @@ class Import extends Model
         'path',
         'sync'
     ];
+
+    protected $attributes = [
+        'user_id' => null,
+    ];
 }

@@ -25,8 +25,12 @@ class StoreQuery extends FormRequest
     {
         return [
             'query' => 'required|max:255',
-            'time' => 'numeric',
-            'lock_time' => 'numeric'
+            'time' => 'nullable|numeric',
+            'lock_time' => 'nullable|numeric',
+            'query_time' => 'nullable|numeric',
+            'rows_sent' => 'nullable|numeric',
+            'rows_examined' => 'nullable|numeric',
+            'host' => 'nullable|string',
         ];
     }
 }

@@ -29,9 +29,9 @@ class QueriesController extends Controller
     {
 
     	if($import_id){
-		    $queries = \App\Query::where([['user_id', '=', Auth::user()->id],['import_id', '=', $import_id]])->paginate(2);
+		    $queries = \App\Query::where([['user_id', '=', Auth::user()->id],['import_id', '=', $import_id]])->paginate(20);
 	    }else{
-			$queries = \App\Query::where('user_id', '=', Auth::user()->id)->paginate(2);
+			$queries = \App\Query::where('user_id', '=', Auth::user()->id)->paginate(20);
 	    }
 	    
         return view('queries/index', ['queries' => $queries]);

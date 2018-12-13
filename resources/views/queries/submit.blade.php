@@ -21,7 +21,7 @@
 
                         <div class="form-group">
                             {!! Form::label('query', 'Query') !!}
-                            {!! Form::text('query', '', ['class' => 'form-control']) !!}
+                            {!! Form::textarea('query', '', ['class' => 'form-control']) !!}
                         </div>
 
                         <div class="form-group">
@@ -30,9 +30,34 @@
                         </div>
 
                         <div class="form-group">
+                            {!! Form::label('query_time', 'Query time') !!}
+                            {!! Form::text('query_time', '', ['class' => 'form-control']) !!}
+                        </div>
+
+                        <div class="form-group">
                             {!! Form::label('lock_time', 'Lock time') !!}
                             {!! Form::text('lock_time', '', ['class' => 'form-control']) !!}
                         </div>
+
+                            <div class="form-group">
+                                {!! Form::label('lock_time', 'Lock time') !!}
+                                {!! Form::text('lock_time', '', ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('rows_sent', 'Rows sent') !!}
+                                {!! Form::text('rows_sent', '', ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('rows_examined', 'Rows examined') !!}
+                                {!! Form::text('rows_examined', '', ['class' => 'form-control']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('host', 'Host') !!}
+                                {!! Form::text('host', '', ['class' => 'form-control']) !!}
+                            </div>
 
                         {!! Form::submit() !!}
                         {!! Form::close() !!}

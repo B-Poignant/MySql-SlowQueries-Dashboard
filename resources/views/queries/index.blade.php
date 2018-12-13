@@ -21,17 +21,20 @@
                                 <th> {{ __('Query') }}</th>
                                 <th> {{ __('Time') }}</th>
                                 <th> {{ __('Lock Time') }}</th>
+                                <th> {{ __('Query Time') }}</th>
+                                <th> {{ __('Import Id') }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach ($queries as $query)
                                 <tr>
-                                    <td>{{ $query->query }}</td>
+                                    <td>{{ str_limit($query->query,50,'(...)') }}</td>
                                     <td>{{ $query->time }}</td>
                                     <td>{{ $query->lock_time }}</td>
+                                    <td>{{ $query->query_time }}</td>
+                                    <td>@if ($query->import_id)<a href="{{ route('queries.index',$query->import_id) }}">Import {{$query->import_id}}</a>@endif</td>
                                 </tr>
                             @endforeach
-
                             {{ $queries->links() }}
                             </tbody>
                         </table>
