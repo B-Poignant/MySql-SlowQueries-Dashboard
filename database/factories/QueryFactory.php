@@ -13,5 +13,6 @@ $factory->define(App\Query::class, function (Faker $faker) {
 		'rows_sent' => $faker->randomDigitNotNull(5),
 		'rows_examined' => $faker->randomDigitNotNull(5),
 		'query' => $faker->sentence,
+        'user_id' => App\User::all(['id'])->random(),
     ];
 });
