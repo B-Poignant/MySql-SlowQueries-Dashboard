@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImportsTable extends Migration
+class CreateImportFilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateImportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('imports', function (Blueprint $table) {
+        Schema::create('import_files', function (Blueprint $table) {
             $table->increments('id');
-			$table->enum('sync',['to_sync','syncing','synced','sync_error']);
             $table->timestamps();
+            $table->enum('status',['waiting','done']);
+            $table->integer('number');
         });
     }
 
@@ -27,6 +28,6 @@ class CreateImportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imports');
+        Schema::dropIfExists('import_files');
     }
 }

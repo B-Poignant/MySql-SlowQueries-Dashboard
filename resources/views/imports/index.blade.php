@@ -21,16 +21,12 @@
                                 <thead>
                                 <tr>
                                     <th> {{ __('Status') }}</th>
-                                    <th> {{ __('Path') }}</th>
-                                    <th> {{ __('Size') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($imports as $import)
                                     <tr>
                                         <td>{{ $import->sync }}</td>
-                                        <td>{{ $import->path }}</td>
-                                        <td>{{ $import->size }}</td>
                                     </tr>
                                 @endforeach
 

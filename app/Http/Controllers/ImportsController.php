@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\SplitImport;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -37,7 +38,7 @@ class ImportsController extends Controller
      */
     public function submit(Request $request)
     {
-		
+
 		$import = new \App\Import;
 		
 		if ($request->isMethod('post')) {
@@ -45,13 +46,14 @@ class ImportsController extends Controller
 				'log' => 'required|max:10000',
 			]);
 
-			$path = $request->file('log')->store('imports/'.Auth::user()->id);
-			$import->path = $path;
-			$import->size = Storage::size($path);
 			$import->user_id = Auth::user()->id;
 			
 			$import->save();
-	
+
+            $request->file('log')->storeAs('imports/pending/'.Auth::user()->id,$import->id.'.sql.log');
+
+            SplitImport::dispatch($import->id);
+
 			return redirect()->route('imports.index')->with('status', 'Import created');
 			
 		}

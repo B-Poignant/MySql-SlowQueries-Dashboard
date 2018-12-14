@@ -4,16 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Import extends Model
+class ImportFile extends Model
 {
 
-    protected $table = 'imports';
+    protected $table = 'import_files';
 
     protected $fillable = [
-        'sync'
+        'status',
+        'number'
     ];
 
     protected $attributes = [
-        'user_id' => null,
+        'import_id' => null,
     ];
 }
