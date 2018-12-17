@@ -41,24 +41,22 @@ class ImportsController extends Controller
 
 		$import = new \App\Import;
 		
-		if ($request->isMethod('post')) {
-			$data = $request->validate([
-				'log' => 'required|max:10000',
-			]);
-
-			$import->user_id = Auth::user()->id;
-			
-			$import->save();
-
-            $request->file('log')->storeAs('imports/pending/'.Auth::user()->id,$import->id.'.sql.log');
-
-            SplitImport::dispatch($import->id);
-
-			return redirect()->route('imports.index')->with('status', 'Import created');
-			
-		}
-		
 		return view('imports/submit',['import'=>$import]);
+    }
+
+    public function post(StoreImport $request)
+    {
+        $data = $request->validated();
+
+        $import = new \App\Import($data);
+        $import->user_id = Auth::user()->id;
+        $import->save();
+
+        $request->file('log')->storeAs('imports/pending/'.Auth::user()->id,$import->id.'.sql.log');
+
+        SplitImport::dispatch($import->id);
+
+        return redirect()->route('imports.index')->with('status', 'Import created');
     }
 	
 }

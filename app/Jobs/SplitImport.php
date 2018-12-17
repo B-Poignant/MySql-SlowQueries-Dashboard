@@ -44,7 +44,11 @@ class SplitImport implements ShouldQueue
         if($size<50000){
             Storage::disk('local')->put($path_splitted.'1'.$extension,Storage::disk('local')->get($path_pending));
 
-            \App\ImportFile::create(['import_id'=>$this->import_id,'number'=>1]);
+            $importFile = new \App\ImportFile;
+            $importFile->import_id = $this->import_id;
+            $importFile->number = 1;
+            $importFile->save();
+
         }else{
             $handle = Storage::disk('local')->readStream($path_pending);
             var_dump($handle);exit;

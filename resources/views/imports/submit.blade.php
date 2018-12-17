@@ -16,7 +16,7 @@
                                 </ul>
                             </div>
                         @endif
-                        {!! Form::open(['route' => 'imports.submit','files' => true]) !!}
+                        {!! Form::open(['route' => 'imports.post','files' => true]) !!}
 
                         <div class="form-group">
                             {!! Form::label('log', 'Log') !!}

@@ -15,7 +15,7 @@ class CreateImportsTable extends Migration
     {
         Schema::create('imports', function (Blueprint $table) {
             $table->increments('id');
-			$table->enum('sync',['to_sync','syncing','synced','sync_error']);
+			$table->enum('sync',['to_sync','syncing','synced','sync_error'])->default('to_sync');
             $table->timestamps();
         });
     }

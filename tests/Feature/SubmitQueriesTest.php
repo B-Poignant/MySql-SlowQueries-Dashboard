@@ -5,14 +5,28 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
+
 
 class SubmitQueriesTest extends TestCase
 {
 	use RefreshDatabase;
 
 	/** @test */
-	function guest_can_submit_a_new_link() {
-		$response = $this->post('/submit', [
+	function guest_cant_access_query_form() {
+		$response = $this->get('/queries/submit');
+
+        $response
+            ->assertStatus(302)
+            ->assertHeader('Location', url('/login'));
+	}
+
+    /** @test */
+    function user_can_submit_a_new_query() {
+
+        $user = factory(User::class)->make();
+
+        $response = $this->actingAs($user)->post('/queries/submit', [
             'query' => 'Example Query',
         ]);
 
@@ -22,18 +36,12 @@ class SubmitQueriesTest extends TestCase
 
         $response
             ->assertStatus(302)
-            ->assertHeader('Location', url('/'));
+            ->assertHeader('Location', url('/queries/index'));
 
-        $this
-            ->get('/')
+        $this->actingAs($user)
+            ->get('/queries/index')
             ->assertSee('Example Query');
-		
-	}
 
-	/** @test */
-	function link_is_not_created_if_validation_fails() {
-		   $response = $this->post('/submit');
+    }
 
-		$response->assertSessionHasErrors(['query']);
-	}
 }

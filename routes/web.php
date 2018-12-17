@@ -28,7 +28,6 @@ Route::match('post','/queries/submit', 'QueriesController@post')->name('queries.
 Route::get('/imports/index', 'ImportsController@index')->name('imports.index');
 Route::match(['get','post'],'/imports/submit', 'ImportsController@submit')->name('imports.submit');
 
-
 Route::match('get', '/testSplitImport', function () {
     $job = new \App\Jobs\SplitImport(18);
     $job->handle();

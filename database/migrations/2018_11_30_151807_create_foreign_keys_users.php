@@ -14,13 +14,13 @@ class CreateForeignKeysUsers extends Migration
     public function up()
     {
 	    Schema::table('imports', function (Blueprint $table) {
-		    $table->unsignedInteger('user_id');
+		    $table->unsignedInteger('user_id')->nullable();
 		
 		    $table->foreign('user_id')->references('id')->on('users');
 	    });
 	
 	    Schema::table('queries', function (Blueprint $table) {
-		    $table->unsignedInteger('user_id');
+		    $table->unsignedInteger('user_id')->nullable();
 		
 		    $table->foreign('user_id')->references('id')->on('users');
 
