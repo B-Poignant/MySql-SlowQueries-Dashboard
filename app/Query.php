@@ -23,4 +23,16 @@ class Query extends Model
         'import_id' => null,
         'user_id' => null,
     ];
+
+    public function seedFormImport($raw_content)
+    {
+
+        $keywords = preg_split("/\n/m", $raw_content,null,PREG_SPLIT_DELIM_CAPTURE|PREG_SPLIT_NO_EMPTY);
+
+        $this->time = $keywords[0];
+       // var_dump(     $keywords);exit;
+
+        return $this;
+    }
+
 }

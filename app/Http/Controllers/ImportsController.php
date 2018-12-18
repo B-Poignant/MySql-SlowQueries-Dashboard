@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\SplitImport;
+use App\Http\Requests\StoreImport;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

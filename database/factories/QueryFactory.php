@@ -16,3 +16,12 @@ $factory->define(App\Query::class, function (Faker $faker) {
         'user_id' => App\User::pluck('id')->random(),
     ];
 });
+
+$factory
+    ->state(App\Query::class, 'import', function($user, $faker, $config) {
+
+        var_dump($config->get('raw_content', ''));exit;
+       /* return [
+            'is_active' => true,
+        ];*/
+    });

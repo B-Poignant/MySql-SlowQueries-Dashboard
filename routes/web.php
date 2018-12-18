@@ -30,12 +30,12 @@ Route::match('get','/imports/submit', 'ImportsController@submit')->name('imports
 Route::match('post','/imports/submit', 'ImportsController@post')->name('imports.post');
 
 Route::match('get', '/testSplitImport', function () {
-    $job = new \App\Jobs\SplitImport(7);
+    $job = new \App\Jobs\SplitImport(6);
     $job->handle();
 });
 
 Route::match('get', '/testStoreQueriesImport', function () {
-    $job = new \App\Jobs\StoreQueriesImport(7);
+    $job = new \App\Jobs\StoreQueriesImport(6);
     $job->handle();
 });
 
