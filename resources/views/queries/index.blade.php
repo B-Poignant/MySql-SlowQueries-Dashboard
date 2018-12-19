@@ -18,6 +18,7 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th> {{ __('Created at') }}</th>
                                 <th> {{ __('Query') }}</th>
                                 <th> {{ __('Time') }}</th>
                                 <th> {{ __('Lock Time') }}</th>
@@ -28,6 +29,7 @@
                             <tbody>
                             @foreach ($queries as $query)
                                 <tr>
+                                    <td>{{ $query->created_at }}</td>
                                     <td>{{ str_limit($query->query,50,'(...)') }}</td>
                                     <td>{{ $query->time }}</td>
                                     <td>{{ $query->lock_time }}</td>

@@ -20,13 +20,15 @@
                             <table class="table">
                                 <thead>
                                 <tr>
+                                    <th> {{ __('Created at') }}</th>
                                     <th> {{ __('Status') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach ($imports as $import)
                                     <tr>
-                                        <td>{{ $import->sync }}</td>
+                                        <td>{{ $import->created_at }}</td>
+                                        <td>{{ $import->status }}</td>
                                     </tr>
                                 @endforeach
 

@@ -42,7 +42,8 @@ class CreateForeignKeysUsers extends Migration
 	    });
 	
 	    Schema::table('queries', function (Blueprint $table) {
-		    $table->dropForeign(['user_id','import_id']);
+		    $table->dropForeign('import_id');
+            $table->dropForeign('user_id');
 	    });
     }
 }

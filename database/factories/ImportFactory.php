@@ -4,7 +4,7 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Import::class, function (Faker $faker) {
     return [
-		'sync' => $faker->randomElement(['to_sync','syncing','synced','sync_error']),
+		'status' => $faker->randomElement(['pending','in_progress','done','error']),
         'user_id' => App\User::pluck('id')->random(),
     ];
 });

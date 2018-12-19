@@ -16,7 +16,7 @@ class CreateImportFilesTable extends Migration
         Schema::create('import_files', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->enum('status',['waiting','done'])->default('waiting');
+            $table->enum('status',['pending','done'])->default('pending');
             $table->integer('number');
             $table->unsignedInteger('import_id');
             $table->foreign('import_id')->references('id')->on('imports');
