@@ -10,7 +10,7 @@ class Import extends Model
     protected $table = 'imports';
 
     protected $fillable = [
-        'sync'
+        'status'
     ];
 
     protected $attributes = [

@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ProcessImport;
 use App\Jobs\SplitImport;
+use App\Jobs\StoreQueriesImport;
 use App\Http\Requests\StoreImport;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ImportsController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
@@ -27,12 +26,12 @@ class ImportsController extends Controller
      */
     public function index()
     {
-		$imports = \App\Import::where('user_id', '=', Auth::user()->id)->paginate(15);
-	
+        $imports = \App\Import::where('user_id', '=', Auth::user()->id)->paginate(15);
+
         return view('imports/index', ['imports' => $imports]);
     }
-	
-	/**
+
+    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -40,11 +39,15 @@ class ImportsController extends Controller
     public function submit(Request $request)
     {
 
-		$import = new \App\Import;
-		
-		return view('imports/submit',['import'=>$import]);
+        $import = new \App\Import;
+
+        return view('imports/submit',['import'=>$import]);
     }
 
+    /**
+     * @param StoreImport $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function post(StoreImport $request)
     {
         $data = $request->validated();
@@ -55,9 +58,14 @@ class ImportsController extends Controller
 
         $request->file('log')->storeAs('imports/pending/'.Auth::user()->id,$import->id.'.sql.log');
 
-        SplitImport::dispatch($import->id);
+        ProcessImport::withChain([
+            new SplitImport,
+            new StoreQueriesImport
+        ])->dispatch($import->id);
+
+        //SplitImport::dispatch($import->id);
 
         return redirect()->route('imports.index')->with('status', 'Import created');
     }
-	
+
 }

@@ -32,7 +32,7 @@ class SplitImport implements ShouldQueue
      */
     public function handle()
     {
-        Log::info($this->import_id);
+        Log::info('SplitImport : ' . $this->import_id);
 
         $import = \App\Import::where('id', '=', $this->import_id)->first();
 

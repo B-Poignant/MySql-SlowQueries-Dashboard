@@ -33,7 +33,7 @@ class StoreQueriesImport implements ShouldQueue
      */
     public function handle()
     {
-        Log::info($this->import_id);
+        Log::info('StoreQueriesImport : ' . $this->import_id);
 
         $import = \App\Import::where('id', '=', $this->import_id)->first();
         $importFiles = \App\ImportFile::where('import_id', '=', $this->import_id)->get();
