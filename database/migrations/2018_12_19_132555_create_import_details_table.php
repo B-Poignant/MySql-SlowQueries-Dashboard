@@ -18,8 +18,8 @@ class CreateImportDetailsTable extends Migration
 
             $table->integer('nb_queries');
             $table->integer('nb_files');
-            $table->decimal('query_time');
-            $table->decimal('lock_time');
+            $table->decimal('query_time',10,6)->nullable();
+            $table->decimal('lock_time',10,6)->nullable();
             $table->integer('rows_sent');
             $table->integer('rows_examined');
 

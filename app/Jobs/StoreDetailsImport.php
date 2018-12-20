@@ -40,14 +40,22 @@ class StoreDetailsImport implements ShouldQueue
 
         $importDetail = new \App\ImportDetail();
         $importDetail->import_id = $this->import_id;
-        $importDetail->nb_files =\App\ImportFile::where('import_id', '=', $this->import_id)->pluck('id')->count();
+        $importDetail->nb_files =\App\ImportFile::where('import_id', '=', $this->import_id)->count();
+
+
+
         foreach ($queries as $query){
+            Log::info('lock_time : ' . $query->lock_time);
+
             $importDetail->nb_queries += 1;
             $importDetail->query_time += $query->query_time;
             $importDetail->lock_time += $query->lock_time;
             $importDetail->rows_sent += $query->rows_sent;
             $importDetail->rows_examined += $query->rows_examined;
         }
+
+        Log::info('lock_time : ' . $importDetail->lock_time);
+
         $importDetail->save();
 
     }

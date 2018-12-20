@@ -21,11 +21,8 @@ class Import extends Model
         'user_id' => null,
     ];
 
-    /**
-     * Get the user that owns the phone.
-     */
     public function importDetail()
     {
-        return $this->belongsTo('App\ImportDetail', 'id');
+        return $this->hasOne('App\ImportDetail');
     }
 }
