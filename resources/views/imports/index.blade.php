@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Imports index <a class="btn btn-primary"
                                                               href="{{ route('imports.submit') }}">{{__('Add an import')}}</a>
@@ -20,8 +20,9 @@
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th> {{ __('Created at') }}</th>
-                                    <th> {{ __('Status') }}</th>
+                                    <th>{{ __('Created at') }}</th>
+                                    <th>{{ __('Status') }}</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -29,6 +30,8 @@
                                     <tr>
                                         <td>{{ $import->created_at }}</td>
                                         <td>{{ $import->status }}</td>
+                                        <td><a class="btn btn-primary"
+                                               href="{{ route('imports.view',$import->id) }}">{{__('Voir')}}</a></td>
                                     </tr>
                                 @endforeach
 

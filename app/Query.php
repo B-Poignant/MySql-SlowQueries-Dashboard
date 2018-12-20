@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\AuthScope;
 
 class Query extends Model
 {
+    use AuthScope;
+
     protected $table = 'queries';
 
 	protected $fillable = [

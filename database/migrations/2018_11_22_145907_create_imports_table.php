@@ -15,7 +15,8 @@ class CreateImportsTable extends Migration
     {
         Schema::create('imports', function (Blueprint $table) {
             $table->increments('id');
-			$table->enum('status',['pending','in_progress','done','error'])->default('pending');
+            $table->string('name')->nullable();
+            $table->enum('status', ['pending', 'processing', 'done', 'error'])->default('pending');
             $table->timestamps();
         });
     }

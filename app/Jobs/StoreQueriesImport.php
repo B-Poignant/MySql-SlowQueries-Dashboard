@@ -16,6 +16,10 @@ class StoreQueriesImport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    public $tries = 5;
+
+    protected $import_id;
+
     /**
      * Create a new job instance.
      *

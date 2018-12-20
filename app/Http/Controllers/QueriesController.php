@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuery;
-use Auth;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QueriesController extends Controller
 {
@@ -29,9 +28,9 @@ class QueriesController extends Controller
     {
 
     	if($import_id){
-		    $queries = \App\Query::where([['user_id', '=', Auth::user()->id],['import_id', '=', $import_id]])->paginate(20);
+            $queries = \App\Query::auth()->where('import_id', '=', $import_id)->paginate(20);
 	    }else{
-			$queries = \App\Query::where('user_id', '=', Auth::user()->id)->paginate(20);
+            $queries = \App\Query::auth()->paginate(20);
 	    }
 	    
         return view('queries/index', ['queries' => $queries]);
@@ -64,5 +63,22 @@ class QueriesController extends Controller
         $query->save();
 
         return redirect()->route('queries.index')->with('status', 'Query created');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function view($id)
+    {
+
+        $query = \App\Query::auth()->where('id', '=', $id)->first();
+
+        if (is_null($query)) {
+            return redirect()->route('queries.index');
+        }
+
+        return view('queries.view', ['query' => $query]);
     }
 }

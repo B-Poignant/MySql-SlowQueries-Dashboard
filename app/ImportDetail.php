@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImportDetail extends Model
 {
+
+    public $timestamps = false;
+
     protected $table = 'import_details';
 
     protected $fillable = [
@@ -20,4 +23,9 @@ class ImportDetail extends Model
     protected $attributes = [
         'import_id' => null,
     ];
+
+    public function import()
+    {
+        return $this->belongsTo('App\Import');
+    }
 }

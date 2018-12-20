@@ -22,10 +22,12 @@ Auth::routes();
 Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
 
 Route::get('/queries/index/{import_id?}', 'QueriesController@index')->name('queries.index');
+Route::match('get', '/queries/view/{id}', 'QueriesController@view')->name('queries.view');
 Route::match('get','/queries/submit', 'QueriesController@submit')->name('queries.submit');
 Route::match('post','/queries/submit', 'QueriesController@post')->name('queries.post');
 
 Route::get('/imports/index', 'ImportsController@index')->name('imports.index');
+Route::match('get', '/imports/view/{id}', 'ImportsController@view')->name('imports.view');
 Route::match('get','/imports/submit', 'ImportsController@submit')->name('imports.submit');
 Route::match('post','/imports/submit', 'ImportsController@post')->name('imports.post');
 
@@ -39,3 +41,7 @@ Route::match('get', '/testStoreQueriesImport', function () {
     $job->handle();
 });
 
+Route::match('get', '/testStoreDetailsImport', function () {
+    $job = new \App\Jobs\StoreDetailsImport(4);
+    $job->handle();
+});

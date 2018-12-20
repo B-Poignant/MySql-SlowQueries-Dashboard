@@ -7,10 +7,13 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 
 class ProcessImport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    public $tries = 5;
 
     protected $import_id;
 
@@ -33,6 +36,8 @@ class ProcessImport implements ShouldQueue
     {
         Log::info('ProcessImport : ' . $this->import_id);
 
-        //todo check user
+        $import = \App\Import::where('id', '=', $this->import_id)->first();
+        $import->status = 'processing';
+        $import->save();
     }
 }

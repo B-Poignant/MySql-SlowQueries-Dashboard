@@ -15,7 +15,6 @@ class CreateImportDetailsTable extends Migration
     {
         Schema::create('import_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
 
             $table->integer('nb_queries');
             $table->integer('nb_files');
@@ -24,6 +23,7 @@ class CreateImportDetailsTable extends Migration
             $table->integer('rows_sent');
             $table->integer('rows_examined');
 
+            $table->unsignedInteger('import_id')->nullable();
             $table->foreign('import_id')->references('id')->on('imports');
         });
     }

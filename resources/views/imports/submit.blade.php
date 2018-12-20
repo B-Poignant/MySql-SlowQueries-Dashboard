@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Import a log file</div>
+                    <div class="card-header">{{ __('Import a log file')}}</div>
                     <div class="card-body">
                         @if ($errors->any())
                             <div class="alert alert-danger">
@@ -19,7 +19,7 @@
                         {!! Form::open(['route' => 'imports.post','files' => true]) !!}
 
                         <div class="form-group">
-                            {!! Form::label('log', 'Log') !!}
+                            {!! Form::label('log', __('Log')) !!}
                             {!! Form::file('log') !!}
                         </div>
 

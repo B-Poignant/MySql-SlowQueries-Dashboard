@@ -24,6 +24,7 @@
                                 <th> {{ __('Lock Time') }}</th>
                                 <th> {{ __('Query Time') }}</th>
                                 <th> {{ __('Import Id') }}</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,6 +36,8 @@
                                     <td>{{ $query->lock_time }}</td>
                                     <td>{{ $query->query_time }}</td>
                                     <td>@if ($query->import_id)<a href="{{ route('queries.index',$query->import_id) }}">Import {{$query->import_id}}</a>@endif</td>
+                                    <td><a class="btn btn-primary"
+                                           href="{{ route('queries.view',$query->id) }}">{{__('Voir')}}</a></td>
                                 </tr>
                             @endforeach
                             {{ $queries->links() }}
