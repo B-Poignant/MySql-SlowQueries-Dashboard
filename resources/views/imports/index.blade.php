@@ -29,7 +29,7 @@
                                 @foreach ($imports as $import)
                                     <tr>
                                         <td>{{ $import->created_at }}</td>
-                                        <td>{{ $import->status }}</td>
+                                        <td>@component('imports/status',['status'=>$import->status])@endcomponent</td>
                                         <td><a class="btn btn-primary"
                                                href="{{ route('imports.view',$import->id) }}">{{__('Voir')}}</a></td>
                                     </tr>
