@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
+Route::get('/dashboard', 'UsersController@dashboard')->name('users.dashboard');
+Route::get('/edit', 'UsersController@edit')->name('users.edit');
 
 Route::get('/queries/index/{import_id?}', 'QueriesController@index')->name('queries.index');
 Route::match('get', '/queries/view/{id}', 'QueriesController@view')->name('queries.view');
