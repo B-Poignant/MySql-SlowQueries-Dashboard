@@ -15,6 +15,13 @@ trait AuthScope
      */
     public function scopeAuth($query)
     {
-        return $query->where('user_id', '=', Auth::user()->id);
+        if (is_a($query->getModel(), 'App\Project')) {
+            return $query->leftjoin('user_role_project',function($leftJoin)
+            {
+                $leftJoin->on('projects.id', '=', 'user_role_project.project_id')/*->joinWhere()*/;
+            })->where('user_role_project.user_id', Auth::user()->id);
+        }else{
+            return $query->where('user_id', '=', Auth::user()->id);
+        }
     }
 }

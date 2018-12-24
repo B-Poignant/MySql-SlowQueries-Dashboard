@@ -66,6 +66,9 @@
                                     <a class="dropdown-item" href="{{ route('imports.index') }}">
                                         {{ __('Imports') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('projects.index') }}">
+                                        {{ __('Projects') }}
+                                    </a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

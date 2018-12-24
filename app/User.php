@@ -32,4 +32,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Import');
     }
+
+    public function roles() {
+        return $this->hasMany('App\Role');
+    }
+
+    public function doctors() {
+        return $this->hasManyThrough('App\Doctor', 'App\Patient');
+    }
 }
