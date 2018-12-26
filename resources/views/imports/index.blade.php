@@ -21,6 +21,7 @@
                                 <thead>
                                 <tr>
                                     <th>{{ __('Created at') }}</th>
+                                    <th>{{ __('Project') }}</th>
                                     <th>{{ __('Status') }}</th>
                                     <th></th>
                                 </tr>
@@ -29,6 +30,8 @@
                                 @foreach ($imports as $import)
                                     <tr>
                                         <td>{{ $import->created_at }}</td>
+
+                                        <td>{{ $import->project->name }}</td>
                                         <td>@component('imports/status',['status'=>$import->status])@endcomponent</td>
                                         <td><a class="btn btn-primary"
                                                href="{{ route('imports.view',$import->id) }}">{{__('Voir')}}</a></td>

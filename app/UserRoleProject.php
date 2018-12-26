@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UserRoleProject extends Model
 {
 
+
     protected $table = 'user_role_project';
 
     protected $attributes = [

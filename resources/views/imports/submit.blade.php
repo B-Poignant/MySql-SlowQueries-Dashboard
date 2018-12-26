@@ -23,6 +23,11 @@
                             {!! Form::file('log') !!}
                         </div>
 
+                            <div class="form-group">
+                                {!! Form::label('project', __('Project')) !!}
+                                {{ Form::select('project_id', $projects) }}
+                            </div>
+
                         {!! Form::submit() !!}
                         {!! Form::close() !!}
                     </div>

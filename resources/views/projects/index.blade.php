@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">Imports index <a class="btn btn-primary"
+                    <div class="card-header">{{__('Projects index')}} <a class="btn btn-primary"
                                                               href="{{ route('projects.submit') }}">{{__('Add a project')}}</a>
                     </div>
 

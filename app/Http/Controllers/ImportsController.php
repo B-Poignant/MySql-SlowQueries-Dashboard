@@ -19,6 +19,8 @@ class ImportsController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        exec('php /full/path/to/artisan view:clear');
     }
 
     /**
@@ -43,7 +45,9 @@ class ImportsController extends Controller
 
         $import = new \App\Import;
 
-        return view('imports/submit',['import'=>$import]);
+        $projects = \App\Project::auth()->pluck('name','id');
+
+        return view('imports/submit',['import'=>$import,'projects'=>$projects]);
     }
 
     /**

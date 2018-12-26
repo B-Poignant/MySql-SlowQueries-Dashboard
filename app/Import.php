@@ -14,15 +14,21 @@ class Import extends Model
 
     protected $fillable = [
         'status',
-        'name'
+        'name',
+        'project_id'
     ];
 
     protected $attributes = [
-        'user_id' => null,
+        'user_id' => null
     ];
 
     public function importDetail()
     {
         return $this->hasOne('App\ImportDetail');
+    }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Project','project_id');
     }
 }

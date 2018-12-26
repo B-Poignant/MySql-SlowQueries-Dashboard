@@ -24,6 +24,8 @@ class CreateUserRoleProjectTable extends Migration
             $table->foreign('project_id')->references('id')->on('projects');
 
             $table->timestamps();
+
+            $table->primary(['user_id', 'role_id', 'project_id']);
         });
     }
 
