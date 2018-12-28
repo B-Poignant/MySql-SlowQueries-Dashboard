@@ -25,6 +25,7 @@ class StoreImport extends FormRequest
     {
         return [
             'log' => 'required|max:10000',
+            'project_id' => 'required|integer',
         ];
     }
 }

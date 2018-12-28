@@ -61,8 +61,9 @@ class ProjectsController extends Controller
 
             $userRoleProject = new \App\UserRoleProject();
             $userRoleProject->project_id = $project->id;
-            $userRoleProject->role_id = \App\RoleProject::ROLE;
+            $userRoleProject->role_id = \App\Role::ROLE_OWNER;
             $userRoleProject->user_id = Auth::user()->id;
+            $userRoleProject->save();
         }
 
         return redirect()->route('projects.index')->with('status', 'Project created');

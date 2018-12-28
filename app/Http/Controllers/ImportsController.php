@@ -47,7 +47,11 @@ class ImportsController extends Controller
 
         $projects = \App\Project::auth()->pluck('name','id');
 
-        return view('imports/submit',['import'=>$import,'projects'=>$projects]);
+        if(count($projects)==0){
+            return redirect()->route('projects.index')->with('status', 'You must create project first');
+        }else{
+            return view('imports/submit',['import'=>$import,'projects'=>$projects]);
+        }
     }
 
     /**

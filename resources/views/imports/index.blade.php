@@ -30,7 +30,6 @@
                                 @foreach ($imports as $import)
                                     <tr>
                                         <td>{{ $import->created_at }}</td>
-
                                         <td>{{ $import->project->name }}</td>
                                         <td>@component('imports/status',['status'=>$import->status])@endcomponent</td>
                                         <td><a class="btn btn-primary"

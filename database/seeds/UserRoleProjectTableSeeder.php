@@ -11,6 +11,6 @@ class UserRoleProjectTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\UserRoleProject::class, 15)->create();
+        factory(App\UserRoleProject::class, 1)->create();
     }
 }
