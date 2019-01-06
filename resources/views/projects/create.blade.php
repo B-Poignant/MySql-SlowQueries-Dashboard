@@ -17,7 +17,7 @@
                             </div>
                         @endif
 
-                        {!! Form::model($project,['route' => 'projects.post']) !!}
+                        {!! Form::model($project,['route' => 'projects.store']) !!}
 
                         <div class="form-group">
                             {!! Form::label('project', 'Name') !!}

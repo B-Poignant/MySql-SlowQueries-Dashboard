@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Import;
 use App\Jobs\ProcessImport;
 use App\Jobs\SplitImport;
 use App\Jobs\StoreQueriesImport;
@@ -20,7 +21,9 @@ class ImportsController extends Controller
     {
         $this->middleware('auth');
 
-        exec('php /full/path/to/artisan view:clear');
+        $this->authorizeResource(Import::class);
+
+        //exec('php artisan view:clear');
     }
 
     /**
@@ -40,7 +43,7 @@ class ImportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function submit(Request $request)
+    public function create(Request $request)
     {
 
         $import = new \App\Import;
@@ -58,7 +61,7 @@ class ImportsController extends Controller
      * @param StoreImport $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function post(StoreImport $request)
+    public function store(StoreImport $request)
     {
         $data = $request->validated();
 
@@ -85,14 +88,8 @@ class ImportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function view($id)
+    public function show(Import $import)
     {
-
-        $import = \App\Import::auth()->where('id', '=', $id)->first();
-
-        if (is_null($import)) {
-            return redirect()->route('imports.index');
-        }
 
         return view('imports/view', ['import' => $import]);
     }

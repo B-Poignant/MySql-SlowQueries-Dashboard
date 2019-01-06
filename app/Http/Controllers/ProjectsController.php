@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Http\Requests\StoreProject;
 use Illuminate\Http\Request;
+use App\Project;
 
 class ProjectsController extends Controller
 {
@@ -37,7 +38,7 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function submit(Request $request)
+    public function create()
     {
 
         $project = new \App\Project;
@@ -49,22 +50,33 @@ class ProjectsController extends Controller
      * @param StoreProject $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function post(StoreProject $request,$id=null)
+    public function store(StoreProject $request)
     {
         $data = $request->validated();
 
-        if($id){
-            $project = \App\Project::auth()->where('id', '=', $id)->first()->update($data);
-        }else{
-            $project = new \App\Project($data);
-            $project->save();
 
-            $userRoleProject = new \App\UserRoleProject();
-            $userRoleProject->project_id = $project->id;
-            $userRoleProject->role_id = \App\Role::ROLE_OWNER;
-            $userRoleProject->user_id = Auth::user()->id;
-            $userRoleProject->save();
-        }
+        $project = new \App\Project($data);
+        $project->save();
+
+        $userRoleProject = new \App\UserRoleProject();
+        $userRoleProject->project_id = $project->id;
+        $userRoleProject->role_id = \App\Role::ROLE_OWNER;
+        $userRoleProject->user_id = Auth::user()->id;
+        $userRoleProject->save();
+
+
+        return redirect()->route('projects.index')->with('status', 'Project created');
+    }
+
+    /**
+     * @param StoreProject $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+        public function update(StoreProject $request,Project $project)
+    {
+        $data = $request->validated();
+
+        $project->update($data);
 
         return redirect()->route('projects.index')->with('status', 'Project created');
     }
@@ -74,16 +86,14 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function view($id)
+    public function show(Project $project)
     {
-
-        $project = \App\Project::auth()->where('id', '=', $id)->first();
 
         if (is_null($project)) {
             return redirect()->route('projects.index');
         }
 
-        return view('projects/view', ['project' => $project]);
+        return view('projects/show', ['project' => $project]);
     }
 
     /**

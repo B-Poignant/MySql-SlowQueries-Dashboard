@@ -6,7 +6,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Queries index <a class="btn btn-primary"
-                                                              href="{{ route('queries.submit') }}">{{__('Add a query')}}</a>
+                                                              href="{{ route('queries.create') }}">{{__('Add a query')}}</a>
                     </div>
 
                     <div class="card-body">
@@ -36,8 +36,13 @@
                                     <td>{{ $query->lock_time }}</td>
                                     <td>{{ $query->query_time }}</td>
                                     <td>@if ($query->import_id)<a href="{{ route('queries.index',$query->import_id) }}">Import {{$query->import_id}}</a>@endif</td>
-                                    <td><a class="btn btn-primary"
-                                           href="{{ route('queries.view',$query->id) }}">{{__('Voir')}}</a></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-primary" href="{{ route('queries.show',$query->id) }}">{{__('Show')}}</a>
+                                            <a class="btn btn-primary" href="{{ route('queries.edit',$query->id) }}">{{__('Edit')}}</a>
+                                            <a class="btn btn-primary" href="{{ route('queries.destroy',$query->id) }}">{{__('Destroy')}}</a>
+                                        </div>
+                                    </td>
                                 </tr>
                             @endforeach
                             {{ $queries->links() }}

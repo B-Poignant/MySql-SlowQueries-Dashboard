@@ -19,7 +19,7 @@ class CreateImportFilesTable extends Migration
             $table->enum('status',['pending','done'])->default('pending');
             $table->integer('number');
             $table->unsignedInteger('import_id');
-            $table->foreign('import_id')->references('id')->on('imports');
+            $table->foreign('import_id')->references('id')->on('imports')->onDelete('cascade');;
         });
     }
 

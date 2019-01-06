@@ -17,7 +17,7 @@
                             </div>
                         @endif
 
-                        {!! Form::model($query,['route' => 'queries.post']) !!}
+                        {!! Form::model($query,['route' => 'queries.store']) !!}
 
                         <div class="form-group">
                             {!! Form::label('query', 'Query') !!}

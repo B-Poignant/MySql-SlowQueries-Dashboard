@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuery;
+use App\Query;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Process\Process;
+
 
 class QueriesController extends Controller
 {
@@ -26,8 +29,7 @@ class QueriesController extends Controller
      */
     public function index($import_id=null)
     {
-
-    	if($import_id){
+        if($import_id){
             $queries = \App\Query::auth()->where('import_id', '=', $import_id)->paginate(20);
 	    }else{
             $queries = \App\Query::auth()->paginate(20);
@@ -41,11 +43,11 @@ class QueriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function submit()
+    public function create()
     {
         $query = new \App\Query;
 
-        return view('queries/submit',['query'=>$query]);
+        return view('queries/create',['query'=>$query]);
     }
 
     /**
@@ -53,7 +55,7 @@ class QueriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function post(StoreQuery $request)
+    public function store(StoreQuery $request)
     {
         $data = $request->validated();
 
@@ -70,15 +72,30 @@ class QueriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function view($id)
+    public function show(Query $query)
     {
-
-        $query = \App\Query::auth()->where('id', '=', $id)->first();
-
         if (is_null($query)) {
             return redirect()->route('queries.index');
         }
 
-        return view('queries.view', ['query' => $query]);
+        return view('queries/show', ['query' => $query]);
+    }
+
+    public function destroy(Query $query)
+    {
+        //
+    }
+
+    public function edit(Query $query)
+    {
+        return view('queries/edit',['query'=>$query]);
+    }
+
+    public function update(StoreQuery $request, Query $query)
+    {
+        $data = $request->validated();
+        $query->save();
+
+        return redirect()->route('queries.show',$query)->with('status', 'Query updated');
     }
 }

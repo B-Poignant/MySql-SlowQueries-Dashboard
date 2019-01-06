@@ -24,7 +24,7 @@ class CreateImportDetailsTable extends Migration
             $table->integer('rows_examined');
 
             $table->unsignedInteger('import_id')->nullable();
-            $table->foreign('import_id')->references('id')->on('imports');
+            $table->foreign('import_id')->references('id')->on('imports')->onDelete('cascade');;
         });
     }
 

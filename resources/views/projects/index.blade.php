@@ -6,7 +6,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">{{__('Projects index')}} <a class="btn btn-primary"
-                                                              href="{{ route('projects.submit') }}">{{__('Add a project')}}</a>
+                                                              href="{{ route('projects.create') }}">{{__('Add a project')}}</a>
                     </div>
 
                     <div class="card-body">
@@ -27,7 +27,7 @@
                                 <tr>
                                     <td>{{ $project->name }}</td>
                                     <td><a class="btn btn-primary"
-                                           href="{{ route('projects.view',$project->id) }}">{{__('View')}}</a>
+                                           href="{{ route('projects.show',$project->id) }}">{{__('Show')}}</a>
                                         <a class="btn btn-primary"
                                            href="{{ route('projects.edit',$project->id) }}">{{__('Edit')}}</a></td>
                                 </tr>
